@@ -1,16 +1,14 @@
 #!/usr/bin/python3
-"""0x11. Python - Network #1, task 7. Error code #1
-"""
+"""Sends a request to the URL and displays the body of the response."""
 
-if __name__ == "__main__":
-    from requests import get
+
+if __name__ == '__main__':
     from sys import argv
+    from requests import get
 
-    try:
-        response = get(argv[1])
-        # override defualt handling of exceptions and reraise them
-        response.raise_for_status()
-    except:
-        print('Error code: {}'.format(response.status_code))
-    else:
-        print(response.text)
+    url = argv[1]
+
+    response = get(url)
+    ERR_TXT = 'Error code: {}'
+    status = response.status_code
+    print(ERR_TXT.format(status) if (status >= 400) else response.text)
